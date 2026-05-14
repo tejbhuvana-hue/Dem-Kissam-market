@@ -185,9 +185,9 @@ const State = {
         return { ...user, ...(profiles[user.id] || {}) };
     },
     logout() { 
-        localStorage.removeItem(this.keys.currentUser); 
+        localStorage.clear();
+        sessionStorage.clear();
         
-        // Find relative path to root index.html
         const path = window.location.pathname;
         let rootPath = './';
         
@@ -195,7 +195,6 @@ const State = {
             const parts = path.split('/pages/')[1].split('/').filter(p => p.length > 0);
             rootPath = '../'.repeat(parts.length + 1);
         } else if (path.includes('/buyer/')) {
-            // Some buyer pages might not be under /pages/ (though in this project they are)
             const parts = path.split('/buyer/')[1].split('/').filter(p => p.length > 0);
             rootPath = '../'.repeat(parts.length + 1);
         }

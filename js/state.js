@@ -137,7 +137,8 @@ const State = {
         return { ...user, ...(profiles[user.id] || {}) };
     },
     logout() { 
-        localStorage.removeItem(this.keys.currentUser); 
+        localStorage.clear();
+        sessionStorage.clear();
         
         const path = window.location.pathname;
         let rootPath = './';
