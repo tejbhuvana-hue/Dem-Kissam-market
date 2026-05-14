@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kissan Market | The Future of Agriculture</title>
+    <!-- Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <style>
+        :root {
+            --primary: #8b4a2b;
+            --primary-dark: #6f3b22;
+            --secondary: #2e7d32;
+            --bg-light: #f4f7f4;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            nav { padding: 1rem 5%; }
+            .nav-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: 0.4s;
+                z-index: 999;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { left: 0; }
+            .nav-btns { display: none; }
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ROLES SECTION */
+        .roles-section {
+            padding: 8rem 5%;
+            background: white;
+            text-align: center;
+        }
+
+        .section-tag {
+            color: var(--primary);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .roles-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            font-weight: 700;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .role-card {
+            background: var(--bg-light);
+            border-radius: 30px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eee;
+        }
+
+        .role-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .card-banner {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-body {
+            padding: 2.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: -55px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .role-card h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            font-weight: 700;
+        }
+
+        .role-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .card-cta {
+            margin-top: auto;
+            color: var(--primary);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            padding: 8rem 5%;
+            background: #f9fbf9;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* STATS SECTION */
+        .stats {
+            padding: 6rem 5%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 5rem 5% 2rem;
+            background: #111;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+            opacity: 0.6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">KISAN MARKET</div>
+        
+        <div class="nav-toggle" id="mobile-toggle">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#roles">Solutions</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <div class="nav-btns">
+            <a href="./pages/auth/login.html" class="btn btn-outline">Login</a>
+            <a href="#roles" class="btn btn-primary">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Smart Digital Marketplace for Farmers, Vendors & Buyers</h1>
+            <p>Empowering the agricultural ecosystem with real-time bidding, seamless procurement, and direct
+                farm-to-table connectivity.</p>
+            <div class="nav-btns" style="justify-content: center;">
+                <a href="./pages/buyer/home/index.html" class="btn btn-primary" style="padding: 1.2rem 2.5rem;">Explore
+                    Marketplace</a>
+                <a href="#roles" class="btn btn-outline" style="border-color: white; color: white;">Join the Network</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROLES SECTION -->
+    <section class="roles-section" id="roles">
+        <span class="section-tag">Choose Your Path</span>
+        <h2>Access Personalized Portals</h2>
+        <div class="role-grid">
+            <!-- Farmer -->
+            <a href="./pages/auth/login.html" class="role-card">
+                <div class="card-banner"
+                    style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=600');">
+                </div>
+                <div class="card-body">
+                    <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
+                    <h3>Farmer</h3>
+                    <p>List crops, manage harvests, and participate in competitive bidding for maximum profit.</p>
+                    <div class="card-cta">Farmer Dashboard <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <!-- Vendor -->
+            <a href="./pages/auth/login.html" class="role-card">
+                <div class="card-banner"
+                    style="background-image: url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=600');">
+                </div>
+                <div class="card-body">
+                    <div class="card-icon"><i class="fa-solid fa-truck"></i></div>
+                    <h3>Vendor</h3>
+                    <p>Procure farm-fresh goods, fulfill buyer orders, and scale your distribution business.</p>
+                    <div class="card-cta">Vendor Dashboard <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <!-- Buyer -->
+            <a href="./pages/auth/login.html" class="role-card">
+                <div class="card-banner"
+                    style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600');">
+                </div>
+                <div class="card-body">
+                    <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <h3>Buyer</h3>
+                    <p>Browse the freshest produce directly from source and get quality delivered to your door.</p>
+                    <div class="card-cta">Marketplace Home <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+
+            <!-- Admin -->
+            <a href="./pages/auth/login.html" class="role-card">
+                <div class="card-banner"
+                    style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600');">
+                </div>
+                <div class="card-body">
+                    <div class="card-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3>Admin</h3>
+                    <p>Maintain platform security, verify participants, and ensure fair trade operations.</p>
+                    <div class="card-cta">Market Admin <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+        <div class="stat-item">
+            <h2>15k+</h2>
+            <p>Farmers Joined</p>
+        </div>
+        <div class="stat-item">
+            <h2>500+</h2>
+            <p>Active Vendors</p>
+        </div>
+        <div class="stat-item">
+            <h2>100k+</h2>
+            <p>Orders Fulfilled</p>
+        </div>
+        <div class="stat-item">
+            <h2>24/7</h2>
+            <p>Market Access</p>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="feature-item">
+            <i class="fa-solid fa-bolt"></i>
+            <h4>Instant Bidding</h4>
+            <p>Real-time price discovery ensures the best value for every harvest.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-shield-check"></i>
+            <h4>Verified Quality</h4>
+            <p>Every participant is verified to ensure transparent and safe transactions.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-leaf"></i>
+            <h4>Farm Fresh</h4>
+            <p>Direct connectivity reduces travel time, ensuring maximum freshness.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-chart-line"></i>
+            <h4>Growth Insights</h4>
+            <p>Data-driven insights to help you make better farming and buying decisions.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">KISAN MARKET</div>
+                <p style="opacity: 0.6; line-height: 1.8;">The world's leading digital infrastructure for modern
+                    agricultural commerce.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li>About Us</li>
+                    <li>Careers</li>
+                    <li>Sustainability</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li>Help Center</li>
+                    <li>Contact Us</li>
+                    <li>Community</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li>Privacy Policy</li>
+                    <li>Terms of Use</li>
+                    <li>Cookie Policy</li>
+                </ul>
+            </div>
+        </div>
+        <div
+            style="text-align: center; border-top: 1px solid #222; padding-top: 2rem; opacity: 0.4; font-size: 0.8rem;">
+            &copy; 2026 Kissan Market. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.9)';
+            }
+        });
+    </script>
+</body>
+
+</html>
